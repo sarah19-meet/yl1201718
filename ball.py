@@ -33,6 +33,7 @@ class Ball(Turtle):
 		bottom_side_ball = new_y - self.r
 		self.goto(new_x,new_y)
 
+
 		if top_side_ball > height:
 			self.dy = - self.dy
 
@@ -45,4 +46,3 @@ class Ball(Turtle):
 		elif right_side_ball > width:
 			self.dx = -self.dx 
 
-MY_BALL = Ball(0,0,5,5,10,"red")
