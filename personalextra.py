@@ -15,7 +15,7 @@ SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
 bgcolor("black")
 running = True
 sleep = 0.0077
-number_of_BALLS = 7
+number_of_BALLS = 7 
 minimum_ball_radius = 3
 maximum_ball_radius = 60
 minimum_ball_dx = -3
@@ -58,6 +58,14 @@ for i in range(number_of_BALLS):
 	print("x:"+str(random_x))
 		    
 	
+	# random_dx = random.randint(minimum_ball_dx,maximum_ball_dx)
+	# while random_dx == 0:
+	# 	random_dx = random.randint(minimum_ball_dx,maximum_ball_dx)
+
+	# random_dy = random.randint(minimum_ball_dy,maximum_ball_dy)
+	# while random_dy == 0:
+	# 	random_dy = random.randint(minimum_ball_dy,maximum_ball_dy)
+	# radius = random.randint(minimum_ball_radius,maximum_ball_radius)
 
 	color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
 	
@@ -181,6 +189,9 @@ def check_myball_collision():
 
 
 def movearound(event):
+	# MY_BALL.x = event.x - screen_width
+	# MY_BALL.y = screen_height -event.y
+	# MY_BALL.goto(MY_BALL.x,MY_BALL.y)
 	MY_BALL.goto(event.x-screen_width,screen_height-event.y)
 turtle.getcanvas().bind("<Motion>", movearound)
 getscreen().listen()
@@ -202,17 +213,6 @@ while running == True:
     if running == False:
     	turtle.color(255,255,255)
     	turtle.write("Game Over", move=False, align="center", font=("Arial", 50, "bold"))
-    
-    turtle.color("white")
-    score=0
-    if  check_myball_collision()== True :
-    	print ("yay!")
-    score = score+1
-    
-
-
-
-
 
    
     getscreen().update()
