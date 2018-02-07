@@ -22,9 +22,14 @@ minimum_ball_dx = -3
 maximum_ball_dx = 3
 minimum_ball_dy = -3
 maximum_ball_dy = 3
+
+
+
 balls =[]
 
 MY_BALL = Ball(0,0,0,0,25,"red")
+
+# life_counter=3
 
 
 
@@ -78,6 +83,8 @@ time.sleep(1)
 turtle.clear()
 
 
+score  = 0
+
 def move_all_balls():
 	for variable in range(number_of_BALLS):
 		balls[variable].move(screen_width,screen_height)
@@ -86,7 +93,7 @@ def check_collide(ball_a,ball_b):
 	if ball_a == ball_b:
 		return False
 
-						#squareroot ( x2-x1 squared ) + ( y2-y1 squared)
+						
 	balls_distance = ((ball_a.xcor()-ball_b.xcor())**2 +(ball_a.ycor()-ball_b.ycor())**2)**0.5
 
 	if balls_distance <= ball_a.r+ball_b.r:
@@ -110,8 +117,7 @@ def check_all_balls_collision():
 				random_dy = random.randint(minimum_ball_dy,maximum_ball_dy)
 				radius = random.randint(minimum_ball_radius,maximum_ball_radius)
 				color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-								# minimum_ball_radius+=1
-				# maximum_ball_radius+=1
+								
 
 				if radius1 > radius2:
 					ball_b.goto(random_x,random_y)
@@ -167,6 +173,12 @@ def check_myball_collision():
 				return False
 			else:
 				MY_BALL.r =new_radius + 1
+				global score
+				score+=1
+				clear()
+				pu()
+				turtle.goto(-500,250)
+				write(score,align='center',font=('Arial',48,'normal'))
 				MY_BALL.shapesize(MY_BALL.r/10)
 				print(MY_BALL.r)
 				ball.goto(random_x,random_y)
@@ -186,8 +198,17 @@ turtle.getcanvas().bind("<Motion>", movearound)
 getscreen().listen()
 
 
+# def timer():
+# 	timer.goto(350,200)
+# 	i=60
+# 	while i>-1:
+# 		i=i-1
+# 		time.sleep(1)
+# 		time.clear()
+# 		time.write("Time: ", move=False, align="center", font=("Arial", 50, "bold"))
 
 
+temp = MY_BALL.r
 
 
 while running == True:
@@ -199,15 +220,60 @@ while running == True:
     check_all_balls_collision()
     MY_BALL.move(screen_width,screen_height)
     running=check_myball_collision()
+    
+
+    turtle.color("white")
+    
+    if  temp > MY_BALL.r:
+    	score+=1
+    	temp = MY_BALL.r
+    	print ("yay!")
+    	turtle.write(score, move=False, align="left", font=("Arial", 50, "bold"))
+
+
+
+
     if running == False:
     	turtle.color(255,255,255)
-    	turtle.write("Game Over", move=False, align="center", font=("Arial", 50, "bold"))
+    	pu()
+    	turtle.goto(0,0)
+    	turtle.write("Game Over!", move=False, align="center", font=("Arial", 50, "bold"))
+    	
+    if running== False:
+    	turtle.color(255,255,255)
+    	pu()
+    	turtle.goto(0,-75)
+    	turtle.write(score, move=False, align="left", font=("Arial", 50, "bold"))
+
+
+
+    	
+
+
     
-    turtle.color("white")
-    score=0
-    if  check_myball_collision()== True :
-    	print ("yay!")
-    score = score+1
+   
+    turtle.color('white')
+
+    if score==10:
+    	turtle.color(255,255,255)
+    	pu()
+    	turtle.goto(0,0)
+    	turtle.write("You Won!!", move=False, align="center", font=("Arial", 50, "bold"))
+    	
+    	time.sleep(10)
+    	quit()
+
+    if score==10:
+    	turtle.color(255,255,255)
+    	pu()
+    	turtle.goto(-200,-200)
+    	turtle.write(score, move=False, align="left", font=("Arial", 50, "bold"))
+
+    	time.sleep(10)
+    	quit()
+
+
+		
     
 
 
